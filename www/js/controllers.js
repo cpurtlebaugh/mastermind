@@ -9,6 +9,11 @@ angular.module('starter.controllers', [])
   // TODO: Needs to be set when buttons in menu.html are clicked.
   $scope.selectedIcon = 0;
 
+  var = code;
+
+  $scope.numIcons     = $scope.icons.length;
+  $scope.numPositions = $scope.icons.length;
+
   // Initialize game state
   $scope.newGame = function() {
     // TODO: Set all data properties/structures to their beginning state
@@ -18,7 +23,7 @@ angular.module('starter.controllers', [])
   // Run newGame() upon loading
   $scope.newGame();
 
-  /* 
+  /*
   TODO: Call this function when the user clicks a 'score' button.
         The 'score' button should remain disabled until all positions have a value.
         Maybe a button with an icon of a checkmark would be a good UI choice? Or,
@@ -44,6 +49,16 @@ angular.module('starter.controllers', [])
     $scope.newGame();
     $scope.winModal.hide();
   };
+
+  function generateCode(){
+    var answer = [];
+    var i;
+    while(i < 4){
+      answer.push(Math.floor(Math.random() * $scope.numIcons));
+      i++;
+    }
+    return answer;
+  }
 
 });
 
