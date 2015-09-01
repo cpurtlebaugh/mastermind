@@ -36,10 +36,14 @@ angular.module('starter.controllers', [])
         just use a small button with text of 'Score'?
   */
   $scope.scoreTurn = function() {
-    // TODO: Score the turn
+    $scope.currentTurn.score();
 
-    // TODO: Show winModal IF turn is correct. Put below line in an if statement.
-    // $scope.winModal.show();
+    // Show winModal IF turn is correct, otherwise, next turn
+    if ($scope.currentTurn.isWinner) {
+      $scope.winModal.show();
+    } else {
+      nextTurn();
+    }
   };
 
 
@@ -50,7 +54,6 @@ angular.module('starter.controllers', [])
     $scope.winModal = modal;
   });
 
-  // TODO: Call this function from the 'Play Again!' button in winModal's html (winner.html)
   $scope.playAgain = function() {
     $scope.newGame();
     $scope.winModal.hide();
