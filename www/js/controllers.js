@@ -13,11 +13,17 @@ angular.module('starter.controllers', [])
 
   $scope.numIcons     = $scope.icons.length;
   $scope.numPositions = $scope.icons.length;
-
+  //class from menu.html
+ $scope.placeholderIcon = 'ion-more';
   // Initialize game state
   $scope.newGame = function() {
     // TODO: Set all data properties/structures to their beginning state
-
+    code = generateCode();
+    //initial turns is 0 so an empty array to account for
+    //future number of turns
+    $scope.turns =[];
+    //invokes a new turn when new game is started with ng-click
+    newTurn();
   };
 
   // Run newGame() upon loading
@@ -30,10 +36,14 @@ angular.module('starter.controllers', [])
         just use a small button with text of 'Score'?
   */
   $scope.scoreTurn = function() {
-    // TODO: Score the turn
+    $scope.currentTurn.score();
 
-    // TODO: Show winModal IF turn is correct. Put below line in an if statement.
-    // $scope.winModal.show();
+    // Show winModal IF turn is correct, otherwise, next turn
+    if ($scope.currentTurn.isWinner) {
+      $scope.winModal.show();
+    } else {
+      nextTurn();
+    }
   };
 
   function Turn(){
@@ -53,12 +63,15 @@ angular.module('starter.controllers', [])
     $scope.winModal = modal;
   });
 
-  // TODO: Call this function from the 'Play Again!' button in winModal's html (winner.html)
   $scope.playAgain = function() {
     $scope.newGame();
     $scope.winModal.hide();
   };
 
+ function newTurn() {
+    $scope.turns.push(new Turn());
+    $scope.currentTurn = $scope.turns[$scope.turns.length - 1];
+  }
   function generateCode(){
     var answer = [];
     var i=0;
