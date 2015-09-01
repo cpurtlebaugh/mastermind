@@ -56,6 +56,10 @@ angular.module('starter.controllers', [])
     $scope.winModal.hide();
   };
 
+ function newTurn() {
+    $scope.turns.push(new Turn());
+    $scope.currentTurn = $scope.turns[$scope.turns.length - 1];
+  }
   function generateCode(){
     var answer = [];
     var i;
