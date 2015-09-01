@@ -36,6 +36,15 @@ angular.module('starter.controllers', [])
     // $scope.winModal.show();
   };
 
+  function Turn(){
+    this.positions = [null, null, null, null];
+    this.perfect = 0;
+    this.almost = 0;
+
+    this.score = function() {
+
+    }
+  };
 
   // Create the winner modal.
   $ionicModal.fromTemplateUrl('templates/winner.html', {
@@ -52,7 +61,7 @@ angular.module('starter.controllers', [])
 
   function generateCode(){
     var answer = [];
-    var i;
+    var i=0;
     while(i < 4){
       answer.push(Math.floor(Math.random() * $scope.numIcons));
       i++;
