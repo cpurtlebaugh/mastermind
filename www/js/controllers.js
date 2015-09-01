@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
   // TODO: Needs to be set when buttons in menu.html are clicked.
   $scope.selectedIcon = 0;
 
-  var = code;
+  var code;
 
   $scope.numIcons     = $scope.icons.length;
   $scope.numPositions = $scope.icons.length;
