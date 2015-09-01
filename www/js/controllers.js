@@ -46,14 +46,51 @@ angular.module('starter.controllers', [])
     }
   };
 
-  function Turn(){
+  function Turn() {
     this.positions = [null, null, null, null];
     this.perfect = 0;
     this.almost = 0;
 
     this.score = function() {
+      var self = this;
+      var picks = self.positions.slice();
+      var secret = code.slice();
 
-    }
+      var i=0;
+
+      while (i< 4) {
+        if (picks[i] === secret[i]) {
+          self.perfect++;
+          picks[i] = null;
+          secret[i] = null;
+        };
+        i++;
+      };
+
+      self.perfect = 0;
+      self.almost = 0;
+
+      if (self.perfect < code.length) {
+        self.isWinner = false;
+        secret.forEach(function(sec) {
+          if (sec != null) {
+            var i=0;
+            while( i< 4 ) {
+              if (sec === picks[i]) {
+                picks[i] = null;
+                self.almost++;
+                break;
+              }
+              i++;
+            }
+          }
+        });
+      } else {
+        self.isWinner = true;
+      }
+
+    };
+
   };
 
   // Create the winner modal.
@@ -72,6 +109,7 @@ angular.module('starter.controllers', [])
     $scope.turns.push(new Turn());
     $scope.currentTurn = $scope.turns[$scope.turns.length - 1];
   }
+
   function generateCode(){
     var answer = [];
     var i=0;
