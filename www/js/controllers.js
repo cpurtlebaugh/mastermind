@@ -13,11 +13,17 @@ angular.module('starter.controllers', [])
 
   $scope.numIcons     = $scope.icons.length;
   $scope.numPositions = $scope.icons.length;
-
+  //class from menu.html
+ $scope.placeholderIcon = 'ion-more';
   // Initialize game state
   $scope.newGame = function() {
     // TODO: Set all data properties/structures to their beginning state
-
+    code = generateCode();
+    //initial turns is 0 so an empty array to account for
+    //future number of turns
+    $scope.turns =[];
+    //invokes a new turn when new game is started with ng-click
+    newTurn();
   };
 
   // Run newGame() upon loading

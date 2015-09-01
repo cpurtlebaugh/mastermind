@@ -1,0 +1,49 @@
+<ion-view view-title="M A S T E R M I N D">
+  <ion-header-bar class="row bar bar-subheader bar-stable">
+    <div class="col col-10">
+      &nbsp;
+    </div>
+    <div class="col text-center left-border">
+      Code
+    </div>
+    <div class="col col-20 text-center left-border">
+      Score
+    </div>
+  </ion-header-bar>
+  <ion-content>
+
+    <ion-list>
+
+      <ion-item class="row turn" ng-repeat="turn in turns track by $index">
+
+        <div class="col col-10 text-center turn-num">
+          {{$index + 1}}
+        </div>
+        <div class="col text-center left-border">
+          <div class="button-bar">
+            <button class="button button-icon icon" ng-repeat="pos in range(numPositions) track by $index"
+                ng-click="turn.positions[$index] = selectedIcon"
+                ng-class="icons[turn.positions[$index]] || placeholderIcon"></button>
+          </div>
+        </div>
+        <div class="col col-20 text-center left-border">
+          <div class="score-wrap">
+
+            <!-- show button if current turn and not winner -->
+            <button class="button button-small button-calm" ng-show="turn === currentTurn && !turn.isWinner"
+                ng-disabled="disableScoreButton()"
+                ng-click="scoreTurn()">&nbsp; score &nbsp;</button>
+
+            <!-- show scores for previous turns -->
+            <div class="perfect" ng-repeat="num in range(turn.perfect) track by $index"></div>
+            <div class="almost" ng-repeat="num in range(turn.almost) track by $index" ng-class="{'first': $index===0}"></div>
+
+          </div>
+        </div>
+
+      </ion-item> <!-- end of ng-repeat for each turn-->
+
+    </ion-list>
+
+  </ion-content>
+</ion-view>
